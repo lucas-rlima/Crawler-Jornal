@@ -65,8 +65,7 @@ class JournalDownloader:
         diajornal = datetime.strptime(f"{day}/{month}/{year}", '%d/%m/%Y').date()
         assert date.today() > diajornal 
         r = self.parse(request_journals(diajornal,diajornal))
-        jsonpath =  list()
-        jsonpath.append(self.download_all(r))
+        jsonpath =  self.download_all(r)
         return jsonpath 
         
             
@@ -122,7 +121,6 @@ class JournalDownloader:
             download_mutiple_jornals([x[0]], [f'{self.pdfs_folder}/{count}.pdf'])
             paths.append(self.dump_json(f'{self.pdfs_folder}/{count}.pdf', x[0], x[1] ))
             count +=1
-        count = 0
         return paths
 
 
