@@ -1,15 +1,11 @@
 NOME_DO_CANDIDATO = 'Lucas Rodrigues de Lima'
 EMAIL_DO_CANDIDATO = 'lima.lucasr@outlook.com'
 
-from calendar import month
-from importlib.resources import path
-from itertools import count
 import json
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from time import sleep
 from typing import Dict, List, Tuple
-from urllib import request
 import os
 from datetime import datetime, date
 
@@ -62,10 +58,10 @@ class JournalDownloader:
         self.jsons_folder.mkdir(exist_ok=True)
 
     def get_day_journals(self, year: int, month: int, day: int) -> List[str]:
-        diajornal = datetime.strptime(f"{day}/{month}/{year}", '%d/%m/%Y').date()
-        assert date.today() > diajornal 
-        r = self.parse(request_journals(diajornal,diajornal))
-        jsonpath =  self.download_all(r)
+        journalday = datetime.strptime(f"{day}/{month}/{year}", '%d/%m/%Y').date()
+        assert date.today() > journalday 
+        request = self.parse(request_journals(journalday,journalday))
+        jsonpath =  self.download_all(request)
         return jsonpath 
         
             
