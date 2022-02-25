@@ -45,7 +45,7 @@ def download_mutiple_jornals(editions, paths):
         results = []
         for task in as_completed(threads):
             results.append(task.result())
-            
+
     results = [[r for r in results if r[0] == e][0] for e in editions]
     return [r[1] for r in results]
 
@@ -59,10 +59,10 @@ class JournalDownloader:
 
     def get_day_journals(self, year: int, month: int, day: int) -> List[str]:
         journalday = datetime.strptime(f"{day}/{month}/{year}", '%d/%m/%Y').date()
-        assert date.today() > journalday 
+        assert date.today() > journalday
         request = self.parse(request_journals(journalday,journalday))
         jsonpath =  self.download_all(request)
-        return jsonpath 
+        return jsonpath
         
             
         
@@ -82,6 +82,7 @@ class JournalDownloader:
                 break
         jsonpath.append(self.download_all(m))
         return jsonpath
+
 
     def get_year_journals(self, year: int) -> List[str]:
         # TODO: get all journals of a year, returns a list of JSON paths
